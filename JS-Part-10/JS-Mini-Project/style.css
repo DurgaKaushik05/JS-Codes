@@ -17,6 +17,10 @@ li {
 /* Simon Says Game */
 body {
     text-align: center;
+    background-color: gray;
+}
+h1, h2, h3 {
+    color: rgb(255, 255, 255);
 }
 .btn {
     height: 200px;
@@ -49,3 +53,16 @@ body {
 .userFlash {
     background-color: green;
 }
+button {
+    padding: 10px 20px;
+    margin-top: 10px;
+    border: none;
+    border-radius: 5px;
+    background: #222;
+    color: white;
+    cursor: pointer;
+    font-size: 16px;
+}
+button:hover{
+    background: #444;
+}   

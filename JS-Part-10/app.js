@@ -151,10 +151,28 @@
 
 
 
-let inp = document.querySelector("#text");
-let p = document.querySelector("p");
+// let inp = document.querySelector("#text");
+// let p = document.querySelector("p");
 
+// inp.addEventListener("input", function() {
+//     console.log(this.value);
+//     p.innerText = inp.value;
+// }); 
+
+
+// Assignment Qs
+let btn = document.createElement("button");
+document.body.appendChild(btn);
+btn.innerText = "click me";
+
+let button = document.querySelector("button");
+button.addEventListener("click ", function() {
+    button.style.color = "green";
+});
+
+
+let h2 = document.querySelector("h2");
+let inp = document.querySelector("input");
 inp.addEventListener("input", function() {
-    console.log(this.value);
-    p.innerText = inp.value;
+    h2.innerText = inp.value.replace(/[^a-zA-Z ]/g, ""); 
 });

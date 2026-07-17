@@ -58,6 +58,15 @@ let level = 0;
 
 let h2 = document.querySelector("h2");
 
+// get high score from browser
+let highScore = localStorage.getItem("highScore") || 0;
+
+// high score display
+let highScoreDisplay = document.querySelector("#highScore");
+
+// show highest score
+highScoreDisplay.innerText = highScore;
+
 document.addEventListener("keypress", function() {
     if(started == false) {
         console.log("game is started");
@@ -94,23 +103,29 @@ function levelUp() {
     gameFlash(randBtn);
 }
 
+// checkAnswer func
 function checkAns(idx) {
     if(userSeq[idx] === gameSeq[idx]) {
         if(userSeq.length == gameSeq.length) {
-            setTimeout(levelUp, 1000);
+            setTimeout(levelUp(), 1000);
         }
     } else {
-        h2.innerHTML = `Game Over! Your score was <b>${level}</b> <br> Press any key to satrt.`;
+        // update high score
+        if(level > highScore) {
+            highScore = level;
+            localStorage.setItem("highScore", highScore);
+            highScoreDisplay.innerText = highScore;
+        }
+        h2.innerHTML = `Game Over! Your score was <b>${level}</b> <br> Press any key to Resatrt.`;
         document.querySelector("body").style.backgroundColor = "red";
         setTimeout(function() {
-            document.querySelector("body").style.backgroundColor = "white";
+            document.querySelector("body").style.backgroundColor = "gray";
         }, 150);
         reset();
     }
 }
 
 function btnPress() {
-    // console.log(this);
     let btn = this;
     userFlash(btn);
 
@@ -124,6 +139,19 @@ let allBtns = document.querySelectorAll(".btn");
 for(btn of allBtns) {
     btn.addEventListener("click", btnPress);
 }
+
+// reset highScore btn
+let resetBtn = document.querySelector("#resetHighScore");
+resetBtn.addEventListener("click", function() {
+    let confirmReset = confirm("are you sure you want to reset the High Score?");
+
+    if(confirmReset) {
+        highScore = 0;
+        localStorage.setItem("highScore", highScore);
+        highScoreDisplay.innerText = highScore;
+        let resetSucces = alert("you reset High Score successfully!");
+    }
+});
 
 function reset() {
     started = false;
